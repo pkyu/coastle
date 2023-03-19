@@ -197,7 +197,7 @@ body {
 
 /* TILE TYPES */
 .tile.lower {
-    background-image: url(/assets/lower.png);
+    background-image: url(assets/lower.png);
     background-size: cover;
 }
 .tile.higher {
