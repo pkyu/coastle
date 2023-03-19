@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="main.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coastle</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Coastle Logo -->
+        <div class="title-container">
+            <img src="assets/coastle_logo.png" alt="Coastle"
+            width = "700"
+            height = "200"
+            class = "center"/>
+        </div>
+        <!-- Coastle Logo End -->
+        <!-- Buttons -->
+        <div class = "button-container">
+            <div class = "button">
+                <button onclick="openPopup('info');">
+                    <img src="assets/infobtn.png">
+                </button>
+            </div>
+            
+            <div class = "button">
+                <button onclick="location.reload();">
+                    <img src="assets/reloadbtn.png">
+                </button>
+            </div>
+            
+        </div>
+        <!-- Search Container -->
+        <div class = "search-container">
+            <div class = "search-element">
+                <h3>Guess any coaster!</h3>
+                <input type = "text" class = "form-control"
+                placeholder="Coaster Name Here..."
+                id="coaster-search-box" onkeyup="findCoasters()">
+
+                <div class = "search-list" id = "search-list">
+                    <!--   List Here   -->
+                    <!--
+                    <div class = "search-list-item">
+                        <div class = "search-item-info">
+                            <h3>Velocicoaster</h3>
+                            <p>Islands of Adventure</p>
+                        </div>
+                    </div>
+                    <div class = "search-list-item">
+                        <div class = "search-item-info">
+                            <h3>Taron</h3>
+                            <p>Phantasialand</p>
+                        </div>
+                    </div>
+                    -->
+                </div>
+            </div>
+        </div>
+        <!-- Search Container End-->
+        
+        <!-- Message Container -->
+        
+        <!-- Message Container End -->
+
+        <div id="game">
+        <div class="hints">
+            
+        </div>
+        <!-- Tile Titles Container -->
+        <div class="tile-title-container">
+            <!-- Manufacturer, Height, Length, Speed, Inversions, Country -->
+            <div class="title nameHolder">Your Guess</div>
+            <div class="title">Manufacturer </div>
+            <div class="title">Height</div>
+            <div class="title">Length</div>
+            <div class="title">Speed</div>
+            <div class="title">Inversions</div>
+            <div class="title">Country</div>
+            <div class="title">Seating</div>
+        </div>
+        <!-- Tile Titles Container End -->
+        
+        <!-- Game Board / Tile Container -->
+        <!-- Game Board / Tile Container End -->
+        </div>
+    </div>
+<script src="confetti.js"></script>
+<script src="app.js"></script>
+<div class="popup" id="info">
+    <div class = "popup-inner">
+        <h3>How to Play</h3>
+        <p>An unknown coaster is randomly chosen from a list of popular, well-known coasters. The list is very biased because I hand-picked them.</p>
+        <p>Type a coaster name into the search box and click the coaster/park you want to guess. Your guess can be any coaster and does not need to be in the popular coasters list.</p>
+        <p>There's four different tiles that can show up when you guess:</p>
+        <img src="assets/higher.png">
+        <p>The answer is higher than your current guess.</p>
+        <img src="assets/lower.png">
+        <p>The answer is lower than your current guess.</p>
+        <img src="assets/wrong.png">
+        <p>The answer doesn't match your current guess.</p>
+        <img src="assets/correct.png">
+        <p>The answer matches your current guess.</p>
+        <p>*</p>
+        <p>Game ends when you guess the correct coaster or you use all six turns.</p>
+        <button onClick="closePopup('info');">Close</button>
+    </div>
+</div>
+<div class="popup" id="endgame">
+    <div class = "popup-inner">
+        <h3 id = "hmsg"></h3>
+        <p id="msg"></p>
+        <button class = "end" onClick="closePopup('endgame');">Close</button>
+    </div>
+</div>
+<div id="overlay"></div>
+</body>
+</html>
