@@ -274,6 +274,7 @@ function compareStats(guess, guessCountry) {
         else if (isGameOver) {
             document.getElementById('hmsg').innerHTML=(`Out of turns :((`);
             document.getElementById('msg').innerHTML=(`The correct answer was ${answer.name} from ${answerPark.name}.`);
+            addLoss();
             openPopup("endgame");
         }
         else if (row === 2) {
@@ -391,6 +392,11 @@ function addWin(turn) {
         }],
     };
     statChart.update();
+}
+function addLoss() {
+    const losses = window.localStorage.getItem(`losses`);
+    if (!losses) window.localStorage.setItem(`losses`, 1);
+    else localStorage.setItem(`losses`,parseInt(localStorage.getItem('losses'))+1);
 }
 function loadStats() {
     const scores = []
