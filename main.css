@@ -175,8 +175,8 @@ body {
     margin-top: 1rem;
     display: grid;
     grid-template-rows: repeat(6,auto);
-    grid-template-columns:repeat(8,auto);
-    margin-right: 70px;
+    grid-template-columns:repeat(9,auto);
+    margin-right: -86px;
 }
 
 .grid .tile {
@@ -223,6 +223,11 @@ body {
     width: 140px;
     font-size: 14px;
     font-weight: 700;
+    border: none;
+}
+.tile.hintHolder img {
+    width:140px;
+    height: 70px;
 }
 
 @keyframes flip {
@@ -316,6 +321,13 @@ button:active {
 
 .popup-inner p {
     line-height: 24px;
+    margin: 10px 0;
+}
+
+.popup-inner.hint p {
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 36px;
+    line-height: 48px;
     margin: 10px 0;
 }
 

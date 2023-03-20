@@ -92,7 +92,7 @@ function drawGrid(container) {
     const grid = document.createElement('div');
     grid.className = 'grid';
     for (let i = 0; i < 6; i++) {
-        for (let j = 0; j < 8; j++) {
+        for (let j = 0; j < 9; j++) {
             drawTile(grid, i, j);
         }
     }
@@ -105,6 +105,11 @@ function updateGrid() {
             const tile = document.getElementById(`tile${i}${j}`);
             tile.textContent = state.grid[i][j];
             if (j == 0) tile.classList.add('nameHolder');
+            if (j == 8) {
+                tile.classList.add('hintHolder');
+                if (i == 2) tile.innerHTML = `<img src="assets/hint1off.png">`;
+                if (i == 4) tile.innerHTML = `<img src="assets/hint2off.png">`;
+            }
         }
     }
 }
@@ -118,7 +123,7 @@ function updateTile(i,j) {
 const state = {
     grid: Array(6)
         .fill()
-        .map(() => Array(8).fill('')),
+        .map(() => Array(9).fill('')),
     currentRow:0,
 };
 
@@ -271,6 +276,24 @@ function compareStats(guess, guessCountry) {
             document.getElementById('hmsg').innerHTML=(`Out of turns :((`);
             document.getElementById('msg').innerHTML=(`The correct answer was ${answer.name} from ${answerPark.name}.`);
             openPopup("endgame");
+        }
+        else if (row === 2) {
+            document.getElementById(`tile28`).innerHTML = `
+            <button onclick="openPopup('hint1');">
+                <img src="assets/hint1on.png">
+            </button>
+            `;
+            document.getElementById('h1m').innerHTML=(answer.name[0]);
+        }
+        else if (row === 4) {
+            document.getElementById(`tile48`).innerHTML = `
+            <button onclick="openPopup('hint2');">
+                <img src="assets/hint2on.png">
+            </button>
+            `;
+            let h2temp = answerPark.name.replace(/[^ ]/g,'-');
+            h2temp = h2temp.replace(/ /g,'  ');
+            document.getElementById('h2m').innerHTML=(answerPark.name[0]+h2temp.substring(1));
         }
     }, 4.5 * animation_duration);
 }
