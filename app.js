@@ -65,7 +65,6 @@ function loadGuess() {
                 }
             })
             const guess = await result.json();
-            console.log(guess);
             makeGuess(guess);
         });
     });
@@ -147,7 +146,6 @@ async function startup() {
     answerPark=data2;
     answerCountry=answerPark.country.name.substring(8);
     answerCountry = answerCountry[0].toUpperCase() + answerCountry.substring(1);
-    console.log(answer);
     drawGrid(game);
     updateGrid();
 }
