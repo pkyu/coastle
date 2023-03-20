@@ -22,7 +22,6 @@ async function loadCoasters(query) {
 			}
 		})
     const data = await res.json();
-    //console.log(data["hydra:member"]);
     if(data["hydra:totalItems"] > 0) displayCoasterList(data["hydra:member"]);
 }
 
@@ -65,6 +64,7 @@ function loadGuess() {
                 }
             })
             const guess = await result.json();
+            console.log(guess);
             makeGuess(guess);
         });
     });
@@ -262,6 +262,7 @@ function compareStats(guess, guessCountry) {
             //alert(`Congratulations! The answer was ${answer.name}!`);
             // Create confetti animation
             startConfetti();
+            addWin(row+1);
             document.getElementById('hmsg').innerHTML=(`You got it!`);
             document.getElementById('msg').innerHTML=(`The correct answer was ${answer.name} from ${answerPark.name}.`);
             openPopup("endgame");
@@ -303,4 +304,100 @@ function openPopup(name) {
 function closePopup(name) {
     document.getElementById(name).classList.remove('open');
     overlay.classList.remove('active');
+}
+
+
+// Local Storage Stats Page (yippe)
+// I'm a Winner
+const canvasElement = document.getElementById("statChart");
+const config = {
+    type: "bar",
+    data: {
+        labels: ["1","2","3","4","5","6"],
+        datasets: [{
+            label: "Games Won",
+            data: loadStats(),
+            backgroundColor: [
+                "rgba(255, 99, 132, 0.3)",
+                "rgba(255, 159, 64, 0.3)",
+                "rgba(240, 230, 140, 0.5)",
+                "rgba(75, 192, 192, 0.3)",
+                "rgba(54, 162, 235, 0.3)",
+                "rgba(153, 102, 255, 0.3)"
+            ],
+            borderColor: [
+                "rgba(255, 99, 132 , 1)",
+                "rgba(255, 159, 64, 1)",
+                "rgba(240, 230, 100, 1)",
+                "rgba(75, 192, 192, 1)",
+                "rgba(54, 162, 235, 1)",
+                "rgba(153, 102, 255, 1)"
+            ],
+            borderWidth: 1,
+        }],
+    },
+    options: {
+        indexAxis: 'y',
+        scales: {
+            x: {
+                suggestedMax: 5,
+                title: {
+                    display: true,
+                    text: 'Games'
+                }
+            },
+            y: {
+                title: {
+                    display: true,
+                    text: 'Turns'
+                }
+            }
+        },
+        plugins: {
+            legend: {
+                display: false
+            }
+        }
+    }
+    
+};
+var statChart = new Chart(canvasElement, config); 
+function addWin(turn) {
+    const rowScore = window.localStorage.getItem(`row${turn}score`);
+    if (!rowScore) window.localStorage.setItem(`row${turn}score`, 1);
+    else localStorage.setItem(`row${turn}score`,parseInt(localStorage.getItem(`row${turn}score`))+1);
+    statChart.config.data = {
+        labels: ["1","2","3","4","5","6"],
+        datasets: [{
+            label: "Games Won",
+            data: loadStats(),
+            backgroundColor: [
+                "rgba(255, 99, 132, 0.3)",
+                "rgba(255, 159, 64, 0.3)",
+                "rgba(240, 230, 140, 0.5)",
+                "rgba(75, 192, 192, 0.3)",
+                "rgba(54, 162, 235, 0.3)",
+                "rgba(153, 102, 255, 0.3)"
+            ],
+            borderColor: [
+                "rgba(255, 99, 132 , 1)",
+                "rgba(255, 159, 64, 1)",
+                "rgba(240, 230, 100, 1)",
+                "rgba(75, 192, 192, 1)",
+                "rgba(54, 162, 235, 1)",
+                "rgba(153, 102, 255, 1)"
+            ],
+            borderWidth: 1,
+        }],
+    };
+    statChart.update();
+}
+function loadStats() {
+    const scores = []
+    for (let i = 1; i < 7; i++) {
+        const rowScore = window.localStorage.getItem(`row${i}score`);
+        if (!rowScore) scores.push(0);
+        else scores.push(parseInt(localStorage.getItem(`row${i}score`)));
+    }
+    return scores;
 }

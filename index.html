@@ -11,6 +11,7 @@
 
         gtag('config', 'G-8B8PKX7TZQ');
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="main.css" />
@@ -39,6 +40,12 @@
             <div class = "button">
                 <button onclick="location.reload();">
                     <img src="assets/reloadbtn.png">
+                </button>
+            </div>
+
+            <div class = "button">
+                <button onclick="openPopup('stats');">
+                    <img src="assets/statsbtn.png">
                 </button>
             </div>
             
@@ -98,8 +105,7 @@
         <!-- Game Board / Tile Container End -->
         </div>
     </div>
-<script src="confetti.js"></script>
-<script src="app.js"></script>
+<script src="assets/confetti.js"></script>
 <div class="popup" id="info">
     <div class = "popup-inner">
         <h3>How to Play</h3>
@@ -114,10 +120,18 @@
         <p>The answer doesn't match your current guess.</p>
         <img src="assets/correct.png">
         <p>The answer matches your current guess.</p>
-        <p>*</p>
+        <p>This site uses CaptainCoaster's API. Sometimes your guess will have a null value if the API does not have that specific data. Sorry in advance.</p>
         <p>You get a hint after turns 3 and 5. Click on the "Hint" button next to that row to see it.</p>
         <p>Game ends when you guess the correct coaster or you use all six turns.</p>
         <button onClick="closePopup('info');">Close</button>
+    </div>
+</div>
+<div class="popup" id="stats">
+    <div class = "popup-inner stat">
+        <h3>Coastle Stats</h3>
+        <canvas id="statChart" width="250" height="200"></canvas>
+        <p>  </p>
+        <button onClick="closePopup('stats');">Close</button>
     </div>
 </div>
 <div class="popup" id="hint1">
@@ -142,5 +156,6 @@
     </div>
 </div>
 <div id="overlay"></div>
+<script src="app.js"></script>
 </body>
 </html>

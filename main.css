@@ -314,7 +314,9 @@ button:active {
     text-align: center;
     width: 380px;
 }
-
+canvas {
+    margin-right: 37px
+}
 .popup-inner h2 {
     margin: 0;
 }
