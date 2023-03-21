@@ -164,6 +164,11 @@ async function startup() {
         window.localStorage.removeItem('daySwap');
         openPopup("gmReset");
     }
+    if (window.localStorage.getItem('gameEnd') && gamemode == 'daily') {
+        setTimeout(() => {
+            showShareButton();
+        }, 5000);
+    }
 }
 
 startup();
@@ -288,6 +293,7 @@ function compareStats(guess, guessCountry) {
                 stopConfetti();
             }, 3000);
             window.localStorage.setItem('gameEnd','true');
+            showShareButton();
         }
         else if (isGameOver) {
             document.getElementById('hmsg').innerHTML=(`Out of turns :((`);
@@ -367,7 +373,7 @@ async function updateDaily() {
                 const guess = await result.json();
                 console.log(guess);
                 makeGuess(guess);
-                await timer(50);
+                await timer(4);
             }
             else break;
         }
@@ -578,4 +584,70 @@ function switchGamemode() {
         window.localStorage.setItem('gamemode','daily');
     }
     location.reload();
+}
+
+// EMOJI SPREAD THE PROPAGANDA MUAHAHAHAHAHA!!!!
+function emoji() {
+    let firstMsg = "Coastle "+(today-19436);
+    let msg = "";
+    loop1:
+    for (let i = 0; i < state.grid.length; i++) {
+        msg += "\n";
+        for (let j = 1; j < state.grid[i].length - 1; j++) {
+            const tile = document.getElementById(`tile${i}${j}`);
+            if(tile.classList.contains('lower')) msg += "⬇️";
+            else if(tile.classList.contains('higher')) msg += "⬆️";
+            else if(tile.classList.contains('wrong')) msg += "🟥";
+            else if(tile.classList.contains('correct')) msg += "🟩";
+            else {
+                firstMsg += ` ${i}/6\n`;
+                break loop1;
+            }
+        }
+    }
+    msg = firstMsg + msg;
+    return msg;
+}
+
+function emojiPropagandaVer() {
+    let firstMsg = "Coastle%20"+(today-19436);
+    let msg = "";
+    loop1:
+    for (let i = 0; i < state.grid.length; i++) {
+        msg += "%0A";
+        for (let j = 1; j < state.grid[i].length - 1; j++) {
+            const tile = document.getElementById(`tile${i}${j}`);
+            if(tile.classList.contains('lower')) msg += "⬇️";
+            else if(tile.classList.contains('higher')) msg += "⬆️";
+            else if(tile.classList.contains('wrong')) msg += "🟥";
+            else if(tile.classList.contains('correct')) msg += "🟩";
+            else {
+                firstMsg += ` ${i}/6%20%23coastle`;
+                break loop1;
+            }
+        }
+    }
+    msg = firstMsg + msg + "https://pkyu.github.io/coastle/";
+    return msg;
+}
+
+function showShareButton() {
+    var s = document.getElementById('shareButtonJumpscare');
+    document.getElementById(`tile08`).classList.add('fades')
+    document.getElementById(`tile08`).innerHTML = `
+        <button onclick="openPopup('copy');
+        copyResult();">
+            <img src="assets/copy.png">
+        </button>
+    `;
+    document.getElementById(`tile18`).classList.add('fades')
+    document.getElementById(`tile18`).innerHTML = `
+        <a href="https://twitter.com/intent/tweet?text=${emojiPropagandaVer()}"">
+            <img src="assets/tweet.png">
+        </button>
+    `;
+}
+
+function copyResult() {
+  navigator.clipboard.writeText(emoji());
 }

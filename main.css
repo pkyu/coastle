@@ -244,9 +244,16 @@ body {
       transform: scaleY(1);
     }
 }
+@keyframes fade-in {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
 
 .animated {
     animation: flip 0.7s ease;
+}
+.fades {
+    animation: fade-in 0.3s ease;
 }
 
 /* Popups and Stuff yeah */
