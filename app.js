@@ -292,7 +292,7 @@ function compareStats(guess, guessCountry) {
             setTimeout(function() {
                 stopConfetti();
             }, 3000);
-            window.localStorage.setItem('gameEnd','true');
+            if(gamemode == 'daily') window.localStorage.setItem('gameEnd','true');
             if(gamemode == 'daily') showShareButton();
         }
         else if (isGameOver) {
