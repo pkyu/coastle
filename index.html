@@ -48,6 +48,12 @@
                     <img src="assets/statsbtn.png">
                 </button>
             </div>
+
+            <div class = "button daily">
+                <button class="daily" onclick="switchGamemode();">
+                    <img id="gmButton" src="assets/dailyAvailable.png">
+                </button>
+            </div>
             
         </div>
         <!-- Search Container -->
@@ -128,10 +134,18 @@
 </div>
 <div class="popup" id="stats">
     <div class = "popup-inner stat">
-        <h3>Coastle Stats</h3>
-        <canvas id="statChart" width="250" height="200"></canvas>
-        <p>  </p>
+        <h3>Daily Stats</h3>
+        <canvas id="dailyStatChart" width="250" height="200"></canvas>
+        <h3>Endless Stats</h3>
+        <canvas id="endlessStatChart" width="250" height="200"></canvas>
         <button onClick="closePopup('stats');">Close</button>
+    </div>
+</div>
+<div class="popup" id="gmReset">
+    <div class = "popup-inner">
+        <h3>New Daily Available!</h3>
+        <p>It's a new day since the last time you played so your gamemode was switched back to daily.</p>
+        <button class = "end" onClick="closePopup('hint1');">Close</button>
     </div>
 </div>
 <div class="popup" id="hint1">
