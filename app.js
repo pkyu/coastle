@@ -167,7 +167,7 @@ async function startup() {
     if (window.localStorage.getItem('gameEnd') && gamemode == 'daily') {
         setTimeout(() => {
             showShareButton();
-        }, 5000);
+        }, 6000);
     }
 }
 
@@ -373,7 +373,7 @@ async function updateDaily() {
                 const guess = await result.json();
                 console.log(guess);
                 makeGuess(guess);
-                await timer(4);
+                await timer(6);
             }
             else break;
         }
@@ -644,7 +644,7 @@ function showShareButton() {
     document.getElementById(`tile18`).innerHTML = `
         <a href="https://twitter.com/intent/tweet?text=${emojiPropagandaVer()}"">
             <img src="assets/tweet.png">
-        </button>
+        </a>
     `;
 }
 
