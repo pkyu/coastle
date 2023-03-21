@@ -518,6 +518,9 @@ function addWin(turn,gamemode) {
             }],
         };
         dailyStatChart.update();
+        const trophies = window.localStorage.getItem(`trophies`);
+        if (!trophies) window.localStorage.setItem(`trophies`, answer.id);
+        else localStorage.setItem(`trophies`,(trophies+','+answer.id));
     }
     else {
         endlessStatChart.config.data = {
@@ -547,6 +550,7 @@ function addWin(turn,gamemode) {
         endlessStatChart.update();
     }
 }
+
 function addLoss(gamemode) {
     const losses = window.localStorage.getItem(`losses${gamemode}`);
     if (!losses) window.localStorage.setItem(`losses${gamemode}`, 1);
