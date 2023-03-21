@@ -273,8 +273,8 @@ function compareStats(guess, guessCountry) {
 
     //Country
     setTimeout(() => {
-        if (guessCountry == 'Usa' || guessCountry == 'Uk') guessCountry = guessCountry.toUpperCase();
-        state.grid[row][1] = "" + guessCountry;
+        if (guessCountry == 'Usa' || guessCountry == 'Uk') state.grid[row][1] = "" + guessCountry.toUpperCase();
+        else state.grid[row][1] = "" + guessCountry;
         updateTile(row,1);
         if (answerCountry==guessCountry) document.getElementById(`tile${row}1`).classList.add('correct');
         else document.getElementById(`tile${row}1`).classList.add('wrong');
