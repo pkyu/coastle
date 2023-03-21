@@ -295,7 +295,7 @@ function compareStats(guess, guessCountry) {
     const isWinner = answer.id === guess.id;
     const isGameOver = (row === 5);
     if (gamemode == 'daily' && window.localStorage.getItem('gameEnd')) return;
-    if (gamemode == 'daily' && row < 6) window.localStorage.setItem(`guess${(row+1)}`, guess);
+    if (gamemode == 'daily' && row < 6) window.localStorage.setItem(`guess${(row+1)}`, guess.id);
     setTimeout(() => {
         if(isWinner) {
             //alert(`Congratulations! The answer was ${answer.name}!`);
