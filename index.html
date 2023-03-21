@@ -50,6 +50,12 @@
                 </button>
             </div>
 
+            <div class = "button">
+                <button onclick="openPopup('settings');">
+                    <img src="assets/settingBtn.png">
+                </button>
+            </div>
+
             <div class = "button daily">
                 <button class="daily" onclick="switchGamemode();">
                     <img id="gmButton" src="assets/dailyAvailable.png">
@@ -151,6 +157,20 @@
         <h3>New Daily Available!</h3>
         <p>It's a new day since the last time you played so your gamemode was switched back to daily.</p>
         <button class = "end" onClick="closePopup('hint1');">Close</button>
+    </div>
+</div>
+<div class="popup" id="settings">
+    <div class = "popup-inner">
+        <h3>Settings</h3>
+        <label class="switch-hold">
+        <label class="switch">
+            <input type="checkbox" id="unitCheck" onclick="swapUnits()">
+            <span class="slider round"></span>
+          </label>
+          <span class="slider-label">Use Metric</span>
+        </label>
+        <p>Reload page for changes to take effect.</p>
+        <button class = "end" onClick="closePopup('settings');">Close</button>
     </div>
 </div>
 <div class="popup" id="hint1">

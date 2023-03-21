@@ -11,6 +11,7 @@ const popup = document.getElementById("popup");
 const today = Math.floor(Date.now() / 86400000);
 
 let gamemode = 'daily';
+let usingMetric = false;
 var answer;
 var answerPark;
 var answerCountry;
@@ -133,7 +134,7 @@ const state = {
 async function startup() {
     if (window.localStorage.getItem(`gamemode`)) gamemode = window.localStorage.getItem(`gamemode`);
     if (gamemode == 'endless') checkMaybeSwitch();
-
+    setUnits();
     const game = document.getElementById('game');
     var aID;
     if (gamemode == 'endless') aID = paIDs[Math.floor(Math.random() * paIDs.length)];
@@ -212,10 +213,16 @@ function compareStats(guess, guessCountry) {
 
     // Height
     setTimeout(() => {
-        state.grid[row][2] = "" + guess.height + " m";
+        let gHeight = guess.height, aHeight = answer.height;
+        if (!usingMetric) {
+            gHeight = meterToFt(guess.height);
+            aHeight = meterToFt(answer.height);
+            state.grid[row][2] = "" + gHeight + " ft";
+        }
+        else state.grid[row][2] = "" + gHeight + " m";
         updateTile(row,2);
-        if (answer.height==guess.height) document.getElementById(`tile${row}2`).classList.add('correct');
-        else if (answer.height > guess.height) document.getElementById(`tile${row}2`).classList.add('higher');
+        if (aHeight==gHeight) document.getElementById(`tile${row}2`).classList.add('correct');
+        else if (aHeight > gHeight) document.getElementById(`tile${row}2`).classList.add('higher');
         else document.getElementById(`tile${row}2`).classList.add('lower');
     }, ((i++ + 1) * animation_duration) / 2);
     document.getElementById(`tile${row}2`).classList.add('animated')
@@ -223,10 +230,16 @@ function compareStats(guess, guessCountry) {
 
     //Length
     setTimeout(() => {
-        state.grid[row][3] = "" + guess.length + " m";
+        let gLength = guess.length, aLength = answer.length;
+        if (!usingMetric) {
+            gLength = meterToFt(guess.length);
+            aLength = meterToFt(answer.length);
+            state.grid[row][3] = "" + gLength + " ft";
+        }
+        else state.grid[row][3] = "" + gLength + " m";
         updateTile(row,3);
-        if (answer.length==guess.length) document.getElementById(`tile${row}3`).classList.add('correct');
-        else if (answer.length > guess.length) document.getElementById(`tile${row}3`).classList.add('higher');
+        if (aLength==gLength) document.getElementById(`tile${row}3`).classList.add('correct');
+        else if (aLength > gLength) document.getElementById(`tile${row}3`).classList.add('higher');
         else document.getElementById(`tile${row}3`).classList.add('lower');
     }, ((i++ + 1) * animation_duration) / 2);
     document.getElementById(`tile${row}3`).classList.add('animated')
@@ -234,10 +247,16 @@ function compareStats(guess, guessCountry) {
 
     //Speed
     setTimeout(() => {
-        state.grid[row][4] = "" + guess.speed + " km/h";
+        let gSpeed = guess.speed, aSpeed = answer.speed;
+        if (!usingMetric) {
+            gSpeed = kmhToMph(guess.speed);
+            aSpeed = kmhToMph(answer.speed);
+            state.grid[row][4] = "" + gSpeed + " mph";
+        }
+        else state.grid[row][4] = "" + gSpeed + " km/h";
         updateTile(row,4);
-        if (answer.speed==guess.speed) document.getElementById(`tile${row}4`).classList.add('correct');
-        else if (answer.speed > guess.speed) document.getElementById(`tile${row}4`).classList.add('higher');
+        if (gSpeed==aSpeed) document.getElementById(`tile${row}4`).classList.add('correct');
+        else if (aSpeed > gSpeed) document.getElementById(`tile${row}4`).classList.add('higher');
         else document.getElementById(`tile${row}4`).classList.add('lower');
     }, ((i++ + 1) * animation_duration) / 2);
     document.getElementById(`tile${row}4`).classList.add('animated')
@@ -649,4 +668,20 @@ function showShareButton() {
 
 function copyResult() {
   navigator.clipboard.writeText(emoji());
+}
+
+// Settings
+function setUnits() {
+    usingMetric = (localStorage.getItem('usingMetric') === 'true');
+    document.getElementById('unitCheck').checked = (usingMetric);
+}
+function swapUnits() {
+    usingMetric = !usingMetric;
+    localStorage.setItem('usingMetric',usingMetric);
+}
+function meterToFt(num) {
+    return Math.round(num * 3.28084);
+}
+function kmhToMph(num) {
+    return Math.round(num * 0.6213709999975642);
 }
