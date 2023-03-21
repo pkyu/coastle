@@ -293,7 +293,7 @@ function compareStats(guess, guessCountry) {
                 stopConfetti();
             }, 3000);
             window.localStorage.setItem('gameEnd','true');
-            showShareButton();
+            if(gamemode == 'daily') showShareButton();
         }
         else if (isGameOver) {
             document.getElementById('hmsg').innerHTML=(`Out of turns :((`);
