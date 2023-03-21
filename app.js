@@ -192,24 +192,23 @@ async function makeGuess(guess) {
 function compareStats(guess, guessCountry) {
     const row = state.currentRow;
     const animation_duration = 700;
-    let i = 0;
     // Name
     setTimeout(() => {
         state.grid[row][0] = guess.name + " - " + guess.park.name;
         updateTile(row,0);
-    }, ((i++ + 1) * animation_duration) / 2);
+    }, ((1) * animation_duration) / 2);
     document.getElementById(`tile${row}0`).classList.add('animated')
     document.getElementById(`tile${row}0`).style.animationDelay = `${(0 * animation_duration / 2)}ms`;
 
     // Manufacturer
     setTimeout(() => {
-        state.grid[row][1] = guess.manufacturer.name;
-        updateTile(row,1);
-        if (answer.manufacturer.name==guess.manufacturer.name) document.getElementById(`tile${row}1`).classList.add('correct');
-        else document.getElementById(`tile${row}1`).classList.add('wrong');
-    }, ((i++ + 1) * animation_duration) / 2);
-    document.getElementById(`tile${row}1`).classList.add('animated')
-    document.getElementById(`tile${row}1`).style.animationDelay = `${(1 * animation_duration / 2)}ms`;
+        state.grid[row][2] = guess.manufacturer.name;
+        updateTile(row,2);
+        if (answer.manufacturer.name==guess.manufacturer.name) document.getElementById(`tile${row}2`).classList.add('correct');
+        else document.getElementById(`tile${row}2`).classList.add('wrong');
+    }, ((3) * animation_duration) / 2);
+    document.getElementById(`tile${row}2`).classList.add('animated')
+    document.getElementById(`tile${row}2`).style.animationDelay = `${(2 * animation_duration / 2)}ms`;
 
     // Height
     setTimeout(() => {
@@ -217,16 +216,16 @@ function compareStats(guess, guessCountry) {
         if (!usingMetric) {
             gHeight = meterToFt(guess.height);
             aHeight = meterToFt(answer.height);
-            state.grid[row][2] = "" + gHeight + " ft";
+            state.grid[row][5] = "" + gHeight + " ft";
         }
-        else state.grid[row][2] = "" + gHeight + " m";
-        updateTile(row,2);
-        if (aHeight==gHeight) document.getElementById(`tile${row}2`).classList.add('correct');
-        else if (aHeight > gHeight) document.getElementById(`tile${row}2`).classList.add('higher');
-        else document.getElementById(`tile${row}2`).classList.add('lower');
-    }, ((i++ + 1) * animation_duration) / 2);
-    document.getElementById(`tile${row}2`).classList.add('animated')
-    document.getElementById(`tile${row}2`).style.animationDelay = `${(2 * animation_duration / 2)}ms`;
+        else state.grid[row][5] = "" + gHeight + " m";
+        updateTile(row,5);
+        if (aHeight==gHeight) document.getElementById(`tile${row}5`).classList.add('correct');
+        else if (aHeight > gHeight) document.getElementById(`tile${row}5`).classList.add('higher');
+        else document.getElementById(`tile${row}5`).classList.add('lower');
+    }, ((6) * animation_duration) / 2);
+    document.getElementById(`tile${row}5`).classList.add('animated')
+    document.getElementById(`tile${row}5`).style.animationDelay = `${(5 * animation_duration / 2)}ms`;
 
     //Length
     setTimeout(() => {
@@ -234,16 +233,16 @@ function compareStats(guess, guessCountry) {
         if (!usingMetric) {
             gLength = meterToFt(guess.length);
             aLength = meterToFt(answer.length);
-            state.grid[row][3] = "" + gLength + " ft";
+            state.grid[row][6] = "" + gLength + " ft";
         }
-        else state.grid[row][3] = "" + gLength + " m";
-        updateTile(row,3);
-        if (aLength==gLength) document.getElementById(`tile${row}3`).classList.add('correct');
-        else if (aLength > gLength) document.getElementById(`tile${row}3`).classList.add('higher');
-        else document.getElementById(`tile${row}3`).classList.add('lower');
-    }, ((i++ + 1) * animation_duration) / 2);
-    document.getElementById(`tile${row}3`).classList.add('animated')
-    document.getElementById(`tile${row}3`).style.animationDelay = `${(3 * animation_duration / 2)}ms`;
+        else state.grid[row][6] = "" + gLength + " m";
+        updateTile(row,6);
+        if (aLength==gLength) document.getElementById(`tile${row}6`).classList.add('correct');
+        else if (aLength > gLength) document.getElementById(`tile${row}6`).classList.add('higher');
+        else document.getElementById(`tile${row}6`).classList.add('lower');
+    }, ((7) * animation_duration) / 2);
+    document.getElementById(`tile${row}6`).classList.add('animated')
+    document.getElementById(`tile${row}6`).style.animationDelay = `${(6 * animation_duration / 2)}ms`;
 
     //Speed
     setTimeout(() => {
@@ -251,47 +250,47 @@ function compareStats(guess, guessCountry) {
         if (!usingMetric) {
             gSpeed = kmhToMph(guess.speed);
             aSpeed = kmhToMph(answer.speed);
-            state.grid[row][4] = "" + gSpeed + " mph";
+            state.grid[row][7] = "" + gSpeed + " mph";
         }
-        else state.grid[row][4] = "" + gSpeed + " km/h";
-        updateTile(row,4);
-        if (gSpeed==aSpeed) document.getElementById(`tile${row}4`).classList.add('correct');
-        else if (aSpeed > gSpeed) document.getElementById(`tile${row}4`).classList.add('higher');
-        else document.getElementById(`tile${row}4`).classList.add('lower');
-    }, ((i++ + 1) * animation_duration) / 2);
-    document.getElementById(`tile${row}4`).classList.add('animated')
-    document.getElementById(`tile${row}4`).style.animationDelay = `${(4 * animation_duration / 2)}ms`;
+        else state.grid[row][7] = "" + gSpeed + " km/h";
+        updateTile(row,7);
+        if (gSpeed==aSpeed) document.getElementById(`tile${row}7`).classList.add('correct');
+        else if (aSpeed > gSpeed) document.getElementById(`tile${row}7`).classList.add('higher');
+        else document.getElementById(`tile${row}7`).classList.add('lower');
+    }, ((8) * animation_duration) / 2);
+    document.getElementById(`tile${row}7`).classList.add('animated')
+    document.getElementById(`tile${row}7`).style.animationDelay = `${(7 * animation_duration / 2)}ms`;
 
     //Inversions
     setTimeout(() => {
-        state.grid[row][5] = "" + guess.inversionsNumber;
-        updateTile(row,5);
-        if (answer.inversionsNumber==guess.inversionsNumber) document.getElementById(`tile${row}5`).classList.add('correct');
-        else if (answer.inversionsNumber > guess.inversionsNumber) document.getElementById(`tile${row}5`).classList.add('higher');
-        else document.getElementById(`tile${row}5`).classList.add('lower');
-    }, ((i++ + 1) * animation_duration) / 2);
-    document.getElementById(`tile${row}5`).classList.add('animated')
-    document.getElementById(`tile${row}5`).style.animationDelay = `${(5 * animation_duration / 2)}ms`;
+        state.grid[row][4] = "" + guess.inversionsNumber;
+        updateTile(row,4);
+        if (answer.inversionsNumber==guess.inversionsNumber) document.getElementById(`tile${row}4`).classList.add('correct');
+        else if (answer.inversionsNumber > guess.inversionsNumber) document.getElementById(`tile${row}4`).classList.add('higher');
+        else document.getElementById(`tile${row}4`).classList.add('lower');
+    }, ((5) * animation_duration) / 2);
+    document.getElementById(`tile${row}4`).classList.add('animated')
+    document.getElementById(`tile${row}4`).style.animationDelay = `${(4 * animation_duration / 2)}ms`;
 
     //Country
     setTimeout(() => {
-        state.grid[row][6] = "" + guessCountry;
-        updateTile(row,6);
-        if (answerCountry==guessCountry) document.getElementById(`tile${row}6`).classList.add('correct');
-        else document.getElementById(`tile${row}6`).classList.add('wrong');
-    }, ((i++ + 1) * animation_duration) / 2);
-    document.getElementById(`tile${row}6`).classList.add('animated')
-    document.getElementById(`tile${row}6`).style.animationDelay = `${(6 * animation_duration / 2)}ms`;
+        state.grid[row][1] = "" + guessCountry;
+        updateTile(row,1);
+        if (answerCountry==guessCountry) document.getElementById(`tile${row}1`).classList.add('correct');
+        else document.getElementById(`tile${row}1`).classList.add('wrong');
+    }, ((2) * animation_duration) / 2);
+    document.getElementById(`tile${row}1`).classList.add('animated')
+    document.getElementById(`tile${row}1`).style.animationDelay = `${(1 * animation_duration / 2)}ms`;
 
     //Seating Type
     setTimeout(() => {
-        state.grid[row][7] = "" + guess.seatingType.name;
-        updateTile(row,7);
-        if (answer.seatingType.name==guess.seatingType.name) document.getElementById(`tile${row}7`).classList.add('correct');
-        else document.getElementById(`tile${row}7`).classList.add('wrong');
-    }, ((i++ + 1) * animation_duration) / 2);
-    document.getElementById(`tile${row}7`).classList.add('animated')
-    document.getElementById(`tile${row}7`).style.animationDelay = `${(7 * animation_duration / 2)}ms`;
+        state.grid[row][3] = "" + guess.seatingType.name;
+        updateTile(row,3);
+        if (answer.seatingType.name==guess.seatingType.name) document.getElementById(`tile${row}3`).classList.add('correct');
+        else document.getElementById(`tile${row}3`).classList.add('wrong');
+    }, ((4) * animation_duration) / 2);
+    document.getElementById(`tile${row}3`).classList.add('animated')
+    document.getElementById(`tile${row}3`).style.animationDelay = `${(3 * animation_duration / 2)}ms`;
 
     const isWinner = answer.id === guess.id;
     const isGameOver = (row === 5);
