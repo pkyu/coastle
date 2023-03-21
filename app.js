@@ -9,7 +9,6 @@ const popupCloseBtn = document.querySelectorAll('[popupCloseButton]');
 const popup = document.getElementById("popup");
 
 const today = Math.floor(Date.now() / 86400000);
-
 let gamemode = 'daily';
 let usingMetric = false;
 var answer;
@@ -274,6 +273,7 @@ function compareStats(guess, guessCountry) {
 
     //Country
     setTimeout(() => {
+        if (guessCountry == 'Usa' || guessCountry == 'Uk') guessCountry = guessCountry.toUpperCase();
         state.grid[row][1] = "" + guessCountry;
         updateTile(row,1);
         if (answerCountry==guessCountry) document.getElementById(`tile${row}1`).classList.add('correct');
@@ -325,7 +325,7 @@ function compareStats(guess, guessCountry) {
                 <img src="assets/hint1on.png">
             </button>
             `;
-            document.getElementById('h1m').innerHTML=(answer.name[0]);
+            document.getElementById('h1m').innerHTML=(answer.toUpperCase().name[0]);
         }
         else if (row === 4) {
             document.getElementById(`tile48`).innerHTML = `
