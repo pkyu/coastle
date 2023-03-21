@@ -209,7 +209,7 @@ function compareStats(guess, guessCountry) {
     }, ((3) * animation_duration) / 2);
     document.getElementById(`tile${row}2`).classList.add('animated')
     document.getElementById(`tile${row}2`).style.animationDelay = `${(2 * animation_duration / 2)}ms`;
-
+//
     // Height
     setTimeout(() => {
         let gHeight = guess.height, aHeight = answer.height;
