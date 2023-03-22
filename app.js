@@ -15,7 +15,7 @@ var answer;
 var answerPark;
 var answerCountry;
 var currentRow;
-let paIDs = [917,2110,2268,3056,3144,2832,2898,2206,716,2270,370,861,2286,2229,2183,1783,2192,2135,2041,2111,2204,3068,178,2354,175,2233,187,2296,59,2137,2058,284,314,387,170,172,202,932,205,222,219,282,176,324,1635,201,289,2202,737,2478,1880,2335,2827,315,2849,2215,2028,270,3066,2946,2323,125];
+let paIDs = [917,2110,2268,3056,3144,2832,2206,716,2270,370,861,2286,2229,2183,1783,2192,2135,258,2041,2111,2204,3068,178,2354,175,2233,187,2296,59,2137,2058,284,314,2898,387,170,172,202,932,205,222,219,282,176,324,1635,201,289,4020,2202,737,2292,3308,1880,2335,2827,315,2849,2215,2028,270,2798,3066,2946,2323,125,3308,186,494,2329,21,1476,2343,2269,2190,1032,344,2164,3048,62,302,1628,935,468,128,924,2054,1145,2819,2136,1773,3286,2043,2896,2261,326,799,517,404,269];
 
 async function loadCoasters(query) {
     const URL = `https://vast-garden-04559.herokuapp.com/https://captaincoaster.com/api/coasters?page=1&name=${query}`;
@@ -54,7 +54,6 @@ function displayCoasterList(coasters) {
     }
     loadGuess();
 }
-
 function loadGuess() {
     const searchListCoasters = searchList.querySelectorAll('.search-list-item');
     searchListCoasters.forEach(coaster => {
@@ -72,6 +71,16 @@ function loadGuess() {
             makeGuess(guess);
         });
     });
+}
+
+async function searchById(id) {
+    const result = await fetch(`https://vast-garden-04559.herokuapp.com/https://captaincoaster.com/api/coasters/${id}`, {
+                headers: {
+                    'X-AUTH-TOKEN':'b154f4d4-bbda-404b-ae3e-ea959f68120d'
+                }
+            })
+    const guess = await result.json();
+    console.log(guess);
 }
 
 window.addEventListener('click', (event) => {
@@ -174,7 +183,6 @@ startup();
 
 async function makeGuess(guess) {
     const row = state.currentRow;
-    console.log(row);
     if (row > 5) return;
     const res = await fetch(`https://vast-garden-04559.herokuapp.com/https://captaincoaster.com${guess.park["@id"]}`, {
         headers: {
@@ -356,12 +364,11 @@ function closePopup(name) {
 
 // Daily?
 function getDailyCoaster() {
-    return paIDs[Math.floor(Date.now() / 86400000)%paIDs.length];
+    return paIDs[(Math.floor(Date.now() / 86400000)-6)%paIDs.length];
 }
 function checkMaybeSwitch() {
     const dayLastPlayed = window.localStorage.getItem(`dayLastPlayed`);
     window.localStorage.setItem(`dayLastPlayed`, today)
-    console.log(today);
     if (dayLastPlayed != today) {
         for (let i = 1; i < 7; i++) {
             window.localStorage.removeItem(`guess${i}`,);
@@ -647,8 +654,8 @@ function emojiPropagandaVer() {
             else break loop1;
         }
     }
-    if (localStorage.getItem('gameState')=='loss') firstMsg += ` X/6`
-    else firstMsg += ` ${state.currentRow}/6`;
+    if (localStorage.getItem('gameState')=='loss') firstMsg += ` X/6 %23coastle`
+    else firstMsg += ` ${state.currentRow}/6 %23coastle`;
     msg = firstMsg + msg + "https://pkyu.github.io/coastle/";
     return msg;
 }
