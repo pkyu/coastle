@@ -174,6 +174,7 @@ startup();
 
 async function makeGuess(guess) {
     const row = state.currentRow;
+    console.log(row);
     if (row > 5) return;
     const res = await fetch(`https://vast-garden-04559.herokuapp.com/https://captaincoaster.com${guess.park["@id"]}`, {
         headers: {
@@ -310,6 +311,7 @@ function compareStats(guess, guessCountry) {
                 stopConfetti();
             }, 3000);
             if(gamemode == 'daily') window.localStorage.setItem('gameEnd','true');
+            if(gamemode == 'daily') window.localStorage.setItem('gameState','win');
             if(gamemode == 'daily') showShareButton();
         }
         else if (isGameOver) {
@@ -317,7 +319,9 @@ function compareStats(guess, guessCountry) {
             document.getElementById('msg').innerHTML=(`The correct answer was ${answer.name} from ${answerPark.name}.`);
             addLoss(gamemode);
             openPopup("endgame");
-            window.localStorage.setItem('gameEnd','true');
+            if(gamemode == 'daily') window.localStorage.setItem('gameEnd','true');
+            if(gamemode == 'daily') window.localStorage.setItem('gameState','loss');
+            if(gamemode == 'daily') showShareButton();
         }
         else if (row === 2) {
             document.getElementById(`tile28`).innerHTML = `
@@ -363,6 +367,7 @@ function checkMaybeSwitch() {
             window.localStorage.removeItem(`guess${i}`,);
         }
         window.localStorage.removeItem(`gameEnd`);
+        window.localStorage.removeItem(`gameState`);
         window.localStorage.setItem(`daySwap`,'true');
         switchGamemode();
     }
@@ -375,6 +380,7 @@ async function updateDaily() {
             window.localStorage.removeItem(`guess${i}`,);
         }
         window.localStorage.removeItem(`gameEnd`);
+        window.localStorage.removeItem(`gameState`);
     }
     else {
         const timer = ms => new Promise(res => setTimeout(res, ms));
@@ -607,6 +613,7 @@ function switchGamemode() {
 function emoji() {
     let firstMsg = "Coastle "+(today-19436);
     let msg = "";
+    let sixTurns = true;
     loop1:
     for (let i = 0; i < state.grid.length; i++) {
         msg += "\n";
@@ -616,12 +623,11 @@ function emoji() {
             else if(tile.classList.contains('higher')) msg += "⬆️";
             else if(tile.classList.contains('wrong')) msg += "🟥";
             else if(tile.classList.contains('correct')) msg += "🟩";
-            else {
-                firstMsg += ` ${i}/6\n`;
-                break loop1;
-            }
+            else break loop1;
         }
     }
+    if (localStorage.getItem('gameState')=='loss') firstMsg += ` X/6`
+    else firstMsg += ` ${state.currentRow}/6`;
     msg = firstMsg + msg;
     return msg;
 }
@@ -638,12 +644,11 @@ function emojiPropagandaVer() {
             else if(tile.classList.contains('higher')) msg += "⬆️";
             else if(tile.classList.contains('wrong')) msg += "🟥";
             else if(tile.classList.contains('correct')) msg += "🟩";
-            else {
-                firstMsg += ` ${i}/6%20%23coastle`;
-                break loop1;
-            }
+            else break loop1;
         }
     }
+    if (localStorage.getItem('gameState')=='loss') firstMsg += ` X/6`
+    else firstMsg += ` ${state.currentRow}/6`;
     msg = firstMsg + msg + "https://pkyu.github.io/coastle/";
     return msg;
 }
