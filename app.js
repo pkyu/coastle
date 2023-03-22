@@ -325,7 +325,7 @@ function compareStats(guess, guessCountry) {
                 <img src="assets/hint1on.png">
             </button>
             `;
-            document.getElementById('h1m').innerHTML=(answer.toUpperCase().name[0]);
+            document.getElementById('h1m').innerHTML=(answer.name[0]);
         }
         else if (row === 4) {
             document.getElementById(`tile48`).innerHTML = `
