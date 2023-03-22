@@ -2,6 +2,7 @@
 semi-possible coaster guessing game
 
 to-do list in order of priority:
-- group numerical values into ranges
+- harder coaster list gamemode
+- daily achievement center to showcase coasters you've gotten right
 - maybe add material types into types
 - picture and maybe video of coaster after game ends
