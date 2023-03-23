@@ -17,7 +17,7 @@ var answerCountry;
 var currentRow;
 let paIDs = [917,2110,2268,404,2832,2206,716,2270,370,861,2286,2229,2261,2183,1783,2192,2135,258,2041,2111,2204,3068,178,2354,175,2233,187,2296,59,2137,2058,284,314,2898,3144,170,387,172,932,205,222,219,282,176,324,1635,201,289,4020,2202,737,2292,3308,1880,2335,2827,202,315,3056,2849,2215,2028,270,2798,3066,2946,2323,125,3308,186,494,2329,21,1476,2343,2269,2190,1032,344,2164,3048,62,302,1628,935,468,128,924,2054,1145,2819,2136,1773,3286,2043,2896,326,799,517,269];
 async function loadCoasters(query) {
-    const URL = `https://vast-garden-04559.herokuapp.com/https://captaincoaster.com/api/coasters?page=1&name=${query}`;
+    const URL = `https://captaincoaster.com/api/coasters?page=1&name=${query}`;
     const res = await fetch(`${URL}`, {
 			headers: {
 				'X-AUTH-TOKEN':'b154f4d4-bbda-404b-ae3e-ea959f68120d'
@@ -58,7 +58,7 @@ function loadGuess() {
         coaster.addEventListener('click', async () => {
             searchList.classList.add(('hide-search-list'));
             coasterSearchBox.value = "";
-            const result = await fetch(`https://vast-garden-04559.herokuapp.com/https://captaincoaster.com/api/coasters/${coaster.dataset.id}`, {
+            const result = await fetch(`https://captaincoaster.com/api/coasters/${coaster.dataset.id}`, {
                 headers: {
                     'X-AUTH-TOKEN':'b154f4d4-bbda-404b-ae3e-ea959f68120d'
                 }
@@ -72,7 +72,7 @@ function loadGuess() {
 }
 
 async function searchById(id) {
-    const result = await fetch(`https://vast-garden-04559.herokuapp.com/https://captaincoaster.com/api/coasters/${id}`, {
+    const result = await fetch(`https://captaincoaster.com/api/coasters/${id}`, {
                 headers: {
                     'X-AUTH-TOKEN':'b154f4d4-bbda-404b-ae3e-ea959f68120d'
                 }
@@ -145,7 +145,7 @@ async function startup() {
     var aID;
     if (gamemode == 'endless') aID = paIDs[Math.floor(Math.random() * paIDs.length)];
     else aID = getDailyCoaster();
-    const URL = `https://vast-garden-04559.herokuapp.com/https://captaincoaster.com/api/coasters/${aID}`;
+    const URL = `https://captaincoaster.com/api/coasters/${aID}`;
     const res = await fetch(`${URL}`, {
 			headers: {
 				'X-AUTH-TOKEN':'b154f4d4-bbda-404b-ae3e-ea959f68120d'
@@ -153,7 +153,7 @@ async function startup() {
 		})
     const data = await res.json();
     answer=data;
-    const res2 = await fetch(`https://vast-garden-04559.herokuapp.com/https://captaincoaster.com${answer.park["@id"]}`, {
+    const res2 = await fetch(`https://captaincoaster.com${answer.park["@id"]}`, {
         headers: {
             'X-AUTH-TOKEN':'b154f4d4-bbda-404b-ae3e-ea959f68120d'
         }
@@ -182,7 +182,7 @@ startup();
 async function makeGuess(guess) {
     const row = state.currentRow;
     if (row > 5) return;
-    const res = await fetch(`https://vast-garden-04559.herokuapp.com/https://captaincoaster.com${guess.park["@id"]}`, {
+    const res = await fetch(`https://captaincoaster.com${guess.park["@id"]}`, {
         headers: {
             'X-AUTH-TOKEN':'b154f4d4-bbda-404b-ae3e-ea959f68120d'
         }
@@ -393,7 +393,7 @@ async function updateDaily() {
             const currGuess = window.localStorage.getItem(`guess${i}`);
             if (currGuess) {
                 let guessID = parseInt(currGuess);
-                const result = await fetch(`https://vast-garden-04559.herokuapp.com/https://captaincoaster.com/api/coasters/${guessID}`, {
+                const result = await fetch(`https://captaincoaster.com/api/coasters/${guessID}`, {
                     headers: {
                         'X-AUTH-TOKEN':'b154f4d4-bbda-404b-ae3e-ea959f68120d'
                     }
