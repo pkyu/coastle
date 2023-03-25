@@ -15,7 +15,7 @@ var answer;
 var answerPark;
 var answerCountry;
 var currentRow;
-let paIDs = [917,2110,2268,404,2832,2206,716,2270,370,861,2286,2229,2261,2183,1783,2192,2135,258,2041,2111,2204,3068,178,2354,175,2233,187,2296,59,2137,2058,284,314,2898,3144,170,387,172,932,205,222,219,282,176,324,1635,201,289,4020,2202,737,2292,3308,1880,2335,2827,202,315,3056,2849,2215,2028,270,2798,3066,2946,2323,125,3308,186,494,2329,21,1476,2343,2269,2190,1032,344,2164,3048,62,302,1628,935,468,128,924,2054,1145,2819,2136,1773,3286,2043,2896,326,799,517,269];
+let paIDs = [917,2110,2268,404,2832,2206,716,2270,370,861,2286,2229,2261,2183,3286,1783,2192,2135,258,2041,2111,2204,3068,178,2354,175,2233,187,2296,2137,2058,284,314,2898,3144,170,59,387,172,932,205,222,324,219,282,176,1635,201,289,4020,2202,737,2292,3308,1880,2335,2827,202,315,3056,2849,2215,2028,270,2798,3066,2946,2323,125,3308,186,494,2329,21,1476,2343,2269,2190,1032,344,2164,3048,62,302,1628,935,468,128,924,2054,1145,2819,2136,1773,2043,2896,326,799,517,269];
 async function loadCoasters(query) {
     const URL = `https://vast-garden-04559.herokuapp.com/https://captaincoaster.com/api/coasters?page=1&name=${query}`;
     const res = await fetch(`${URL}`, {
@@ -34,6 +34,25 @@ function findCoasters() {
     } else {
         searchList.classList.add('hide-search-list');
     }
+}
+
+function performSignIn() {
+    let headers = new Headers();
+
+    headers.append('Content-Type', 'application/json');
+    headers.append('Accept', 'application/json');
+    headers.append('Authorization', 'Basic ' + base64.encode(username + ":" +  password));
+    headers.append('Origin','http://localhost:3000');
+
+    fetch(sign_in, {
+        mode: 'cors',
+        credentials: 'include',
+        method: 'POST',
+        headers: headers
+    })
+    .then(response => response.json())
+    .then(json => console.log(json))
+    .catch(error => console.log('Authorization failed: ' + error.message));
 }
 
 function displayCoasterList(coasters) { 
@@ -323,6 +342,8 @@ function compareStats(guess, guessCountry) {
         else if (isGameOver) {
             document.getElementById('hmsg').innerHTML=(`Out of turns :((`);
             document.getElementById('msg').innerHTML=(`The correct answer was ${answer.name} from ${answerPark.name}.`);
+            document.getElementById('msg2').innerHTML=(`First time hearing of this coaster?`)
+            document.getElementById('msg3').innerHTML=(`<a href="https://www.youtube.com/results?search_query=${answer.name}+${answerPark.name}+pov">Click here to watch a POV!</a>`)
             addLoss(gamemode);
             openPopup("endgame");
             if(gamemode == 'daily') window.localStorage.setItem('gameEnd','true');
