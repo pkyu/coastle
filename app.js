@@ -330,6 +330,7 @@ function compareStats(guess, guessCountry) {
             addWin(row+1,gamemode);
             document.getElementById('hmsg').innerHTML=(`You got it!`);
             document.getElementById('msg').innerHTML=(`The correct answer was ${answer.name} from ${answerPark.name}.`);
+            document.getElementById('msg3').innerHTML=(`<a href="https://www.youtube.com/results?search_query=${answer.name}+${answerPark.name}+pov">Click here to watch a POV!</a>`)
             openPopup("endgame");
             // Remove confetti after animation finishes
             setTimeout(function() {
@@ -342,7 +343,6 @@ function compareStats(guess, guessCountry) {
         else if (isGameOver) {
             document.getElementById('hmsg').innerHTML=(`Out of turns :((`);
             document.getElementById('msg').innerHTML=(`The correct answer was ${answer.name} from ${answerPark.name}.`);
-            document.getElementById('msg2').innerHTML=(`First time hearing of this coaster?`)
             document.getElementById('msg3').innerHTML=(`<a href="https://www.youtube.com/results?search_query=${answer.name}+${answerPark.name}+pov">Click here to watch a POV!</a>`)
             addLoss(gamemode);
             openPopup("endgame");
