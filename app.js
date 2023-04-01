@@ -83,7 +83,6 @@ async function searchById(id) {
     const guess = await result.json();
     console.log(guess);
 }
-searchById(205);
 
 window.addEventListener('click', (event) => {
     if(event.target.className != "form-control") {
@@ -166,6 +165,7 @@ async function startup() {
     answerPark=data2;
     answerCountry=answerPark.country.name.substring(8);
     answerCountry = answerCountry[0].toUpperCase() + answerCountry.substring(1);
+    /*temp april */if (answer.id == 2111) answer.inversionsNumber = 3;
     drawGrid(game);
     updateGrid();
     if (gamemode == 'daily') updateDaily();
@@ -192,7 +192,8 @@ async function makeGuess(guess) {
         }
     })
     const data = await res.json();
-    const guessPark = data;
+    guessPark = data;
+    /*temp april */if (guess.id == 2111) guess.inversionsNumber = 3;
     let guessCountry = guessPark.country.name.substring(8);
     guessCountry = guessCountry[0].toUpperCase() + guessCountry.substring(1);
     compareStats(guess, guessCountry);
