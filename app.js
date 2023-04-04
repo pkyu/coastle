@@ -166,6 +166,7 @@ async function startup() {
     answerCountry=answerPark.country.name.substring(8);
     answerCountry = answerCountry[0].toUpperCase() + answerCountry.substring(1);
     /*temp april */if (answer.id == 2111) answer.inversionsNumber = 3;
+    if (answer.id == 3056) answer.inversionsNumber = 2;
     drawGrid(game);
     updateGrid();
     if (gamemode == 'daily') updateDaily();
@@ -194,6 +195,7 @@ async function makeGuess(guess) {
     const data = await res.json();
     guessPark = data;
     /*temp april */if (guess.id == 2111) guess.inversionsNumber = 3;
+    if (guess.id == 3056) guess.inversionsNumber = 2;
     let guessCountry = guessPark.country.name.substring(8);
     guessCountry = guessCountry[0].toUpperCase() + guessCountry.substring(1);
     compareStats(guess, guessCountry);
