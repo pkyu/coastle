@@ -26,5 +26,4 @@ https://pkyu.github.io/coastle
 
 
 ### Future Features
-- Harder coaster list gamemode
 - Daily achievement center to showcase coasters you've gotten right (stats for this are being kept track of)
