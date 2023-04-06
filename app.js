@@ -10,6 +10,7 @@ const popup = document.getElementById("popup");
 
 const today = Math.floor(Date.now() / 86400000);
 let gamemode = 'daily';
+let endlessHardMode = false;
 let usingMetric = false;
 var answer;
 var answerPark;
@@ -143,9 +144,13 @@ async function startup() {
     if (window.localStorage.getItem(`gamemode`)) gamemode = window.localStorage.getItem(`gamemode`);
     if (gamemode == 'endless') checkMaybeSwitch();
     setUnits();
+    setEndlessMode();
     const game = document.getElementById('game');
     var aID;
-    if (gamemode == 'endless') aID = paIDs[Math.floor(Math.random() * paIDs.length)];
+    if (gamemode == 'endless') {
+        if (endlessHardMode) aID = extended_paIDs[Math.floor(Math.random() * extended_paIDs.length)];
+        else aID = paIDs[Math.floor(Math.random() * paIDs.length)];
+    }
     else aID = getDailyCoaster();
     const URL = `https://vast-garden-04559.herokuapp.com/https://captaincoaster.com/api/coasters/${aID}`;
     const res = await fetch(`${URL}`, {
@@ -174,6 +179,10 @@ async function startup() {
     if (window.localStorage.getItem(`daySwap`)) {
         window.localStorage.removeItem('daySwap');
         openPopup("gmReset");
+    }
+    if (window.localStorage.getItem(`update`) != '1') {
+        window.localStorage.setItem('update','1');
+        openPopup("updateNotif");
     }
     if (window.localStorage.getItem('gameEnd') && gamemode == 'daily') {
         setTimeout(() => {
@@ -692,9 +701,17 @@ function setUnits() {
     usingMetric = (localStorage.getItem('usingMetric') === 'true');
     document.getElementById('unitCheck').checked = (usingMetric);
 }
+function setEndlessMode() {
+    endlessHardMode = (localStorage.getItem('endlessHardCheck') === 'true');
+    document.getElementById('endlessHardCheck').checked = (endlessHardMode);
+}
 function swapUnits() {
     usingMetric = !usingMetric;
     localStorage.setItem('usingMetric',usingMetric);
+}
+function swapEndlessMode() {
+    endlessHardMode = !endlessHardMode;
+    localStorage.setItem('endlessHardCheck',endlessHardMode);
 }
 function meterToFt(num) {
     return Math.round(num * 3.28084);

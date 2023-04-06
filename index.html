@@ -152,6 +152,14 @@
         <button class = "end" onClick="closePopup('copy');">Close</button>
     </div>
 </div>
+<div class="popup open" id="updateNotif">
+    <div class = "popup-inner">
+        <h3> > Harder Endless Now Available! < </h3>
+        <p>Toggle it in the settings menu.</p>
+        <p>(i take no responsibility for increased suffering)</p>
+        <button class = "end" onClick="closePopup('updateNotif');">Close</button>
+    </div>
+</div>
 <div class="popup" id="gmReset">
     <div class = "popup-inner">
         <h3>New Daily Available!</h3>
@@ -170,12 +178,20 @@
     <div class = "popup-inner">
         <h3>Settings</h3>
         <label class="switch-hold">
-        <label class="switch">
+          <label class="switch">
             <input type="checkbox" id="unitCheck" onclick="swapUnits()">
             <span class="slider round"></span>
           </label>
           <span class="slider-label">Use Metric</span>
         </label>
+        <p></p>
+        <label class="switch-hold">
+            <label class="switch">
+              <input type="checkbox" id="endlessHardCheck" onclick="swapEndlessMode()">
+              <span class="slider round"></span>
+            </label>
+            <span class="slider-label">Harder Endless</span>
+          </label>
         <p>Reload page for changes to take effect.</p>
         <button class = "end" onClick="closePopup('settings');">Close</button>
     </div>
