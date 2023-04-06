@@ -21,12 +21,7 @@ Look at people suffering here: https://twitter.com/search?q=coastle&src=spelling
 
 <img src="https://user-images.githubusercontent.com/55111674/230291469-b2cd9c9b-3237-42b1-bb8e-09e6915775ed.png" width="500">
 
-<img src="https://user-images.githubusercontent.com/55111674/230290487-6d88217a-756c-47d8-a82b-a0daebe85fe1.png" width="500">
-
-### Over 10,000 unique users with hundreds returning each day
-<img src="https://user-images.githubusercontent.com/55111674/230296948-7b23c6ad-88db-4a96-b4c6-c5cc5025e2dd.png" width="500">
-
-### Try it yourself
+### Playable at link below
 https://pkyu.github.io/coastle
 
 
