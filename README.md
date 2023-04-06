@@ -23,11 +23,13 @@ Look at people suffering here: https://twitter.com/search?q=coastle&src=spelling
 
 <img src="https://user-images.githubusercontent.com/55111674/230290487-6d88217a-756c-47d8-a82b-a0daebe85fe1.png" width="500">
 
-### Try it yourself!
-https://pkyu.github.io/coastle/
+### Over 10,000 unique users with hundreds returning each day
+<img src="https://user-images.githubusercontent.com/55111674/230296948-7b23c6ad-88db-4a96-b4c6-c5cc5025e2dd.png" width="500">
 
-### To-Do List:
-- harder coaster list gamemode
-- daily achievement center to showcase coasters you've gotten right
-- maybe add material types into types
+### Try it yourself
+https://pkyu.github.io/coastle
 
+
+### Future Features
+- Harder coaster list gamemode
+- Daily achievement center to showcase coasters you've gotten right (stats for this are being kept track of)
