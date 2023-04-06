@@ -16,7 +16,7 @@ Deployed at https://pkyu.github.io/coastle/
 ### Easily watch POVs to re-experience a ride or learn about a new coaster when finished
 <img src="https://user-images.githubusercontent.com/55111674/230293756-89422dcb-fbad-4852-95a9-af15ac0cfd2c.gif" width="600">
 
-### Multiple ways to export your stats to compare how you did with hundreds of others
+### Multiple ways to export your stats to compare how you did with others
 Look at people suffering here: https://twitter.com/search?q=coastle&src=spelling_expansion_revert_click&f=live
 
 <img src="https://user-images.githubusercontent.com/55111674/230291469-b2cd9c9b-3237-42b1-bb8e-09e6915775ed.png" width="500">
