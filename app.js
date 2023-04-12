@@ -31,12 +31,15 @@ async function loadCoasters(query) {
     if(data["hydra:totalItems"] > 0) displayCoasterList(data["hydra:member"]);
 }
 
-
+let debounce;
 function findCoasters() {
     let query = (coasterSearchBox.value).trim();
     if(query.length > 0) {
         searchList.classList.remove('hide-search-list');
-        loadCoasters(query);
+        clearTimeout(debounce);
+        debounce = setTimeout(function() {
+            loadCoasters(query);
+        }, 300)
     } else {
         searchList.classList.add('hide-search-list');
     }
