@@ -425,8 +425,7 @@ async function updateDaily() {
                 })
                 const guess = await result.json();
                 console.log(guess);
-                makeGuess(guess);
-                await timer(100);
+                await makeGuess(guess);
             }
             else break;
         }
