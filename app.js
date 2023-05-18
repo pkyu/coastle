@@ -179,6 +179,7 @@ async function startup() {
     answerCountry = answerCountry[0].toUpperCase() + answerCountry.substring(1);
     /*temp april */if (answer.id == 2111) answer.inversionsNumber = 3;
     if (answer.id == 3056) answer.inversionsNumber = 2;
+    if (answer.id == 2896) answer.seatingType.name = "Floorless";
     drawGrid(game);
     updateGrid();
     if (gamemode == 'daily') updateDaily();
@@ -212,6 +213,7 @@ async function makeGuess(guess) {
     guessPark = data;
     /*temp april */if (guess.id == 2111) guess.inversionsNumber = 3;
     if (guess.id == 3056) guess.inversionsNumber = 2;
+    if (guess.id == 2896) guess.seatingType.name = "Floorless";
     let guessCountry = guessPark.country.name.substring(8);
     guessCountry = guessCountry[0].toUpperCase() + guessCountry.substring(1);
     compareStats(guess, guessCountry);
