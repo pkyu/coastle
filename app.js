@@ -28,7 +28,7 @@ async function loadCoasters(query) {
 			}
 		})
     const data = await res.json();
-    if(data["hydra:totalItems"] > 0) displayCoasterList(data["hydra:member"]);
+    if(data["totalItems"] > 0) displayCoasterList(data["member"]);
 }
 
 let debounce;
