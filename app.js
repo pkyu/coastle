@@ -212,7 +212,7 @@ function compareStats(guess, guessCountry) {
 
     // Manufacturer
     setTimeout(() => {
-        state.grid[row][2] = guess.manufacturer.name;
+        state.grid[row][2] = (typeof guess.manufacturer !== 'undefined') ? guess.manufacturer.name : "Unknown";
         updateTile(row,2);
         if (answer.manufacturer.name==guess.manufacturer.name) document.getElementById(`tile${row}2`).classList.add('correct');
         else document.getElementById(`tile${row}2`).classList.add('wrong');
