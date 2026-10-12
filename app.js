@@ -152,8 +152,7 @@ async function startup() {
     const res2 = await fetch(`${apiBaseUrl}${answer.park["@id"].replace(/^\/api/, '')}`);
     const data2 = await res2.json();
     answerPark=data2;
-    answerCountry=answerPark.country.name.substring(8);
-    answerCountry = answerCountry[0].toUpperCase() + answerCountry.substring(1);
+    answerCountry=answerPark.country.name
     /* Hardcoded Fixes for Possible Answers */
     if (answer.id == 2111) answer.inversionsNumber = 3;
     if (answer.id == 3056) answer.inversionsNumber = 2;
@@ -193,8 +192,7 @@ async function makeGuess(guess) {
     if (guess.id == 2896) guess.seatingType.name = "Floorless";
     if (guess.id == 2006) guess.height = 27;
     if (guess.id == 5612) guess.height = 11;
-    let guessCountry = guessPark.country.name.substring(8);
-    guessCountry = guessCountry[0].toUpperCase() + guessCountry.substring(1);
+    let guessCountry = guessPark.country.name
     compareStats(guess, guessCountry);
     state.currentRow++;
 }
