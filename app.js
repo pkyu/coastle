@@ -149,11 +149,8 @@ async function startup() {
     const res = await fetch(`${apiBaseUrl}/coasters/${aID}`);
     const data = await res.json();
     answer=data;
-    const res2 = await fetch(`${apiBaseUrl}${answer.park["@id"].replace(/^\/api/, '')}`);
-    const data2 = await res2.json();
-    answerPark=data2;
-    answerCountry=answerPark.country.name.substring(8);
-    answerCountry = answerCountry[0].toUpperCase() + answerCountry.substring(1);
+    answerPark=answer.park;
+    answerCountry=countryName(answerPark);
     /* Hardcoded Fixes for Possible Answers */
     if (answer.id == 2111) answer.inversionsNumber = 3;
     if (answer.id == 3056) answer.inversionsNumber = 2;
@@ -181,20 +178,24 @@ async function startup() {
 
 startup();
 
+// country + US/UK specific fix
+function countryName(park) {
+    const name = park.country.name;
+    if (name == 'United States') return 'USA';
+    if (name == 'United Kingdom') return 'UK';
+    return name;
+}
+
 async function makeGuess(guess) {
     const row = state.currentRow;
     if (row > 5) return;
-    const res = await fetch(`${apiBaseUrl}${guess.park["@id"].replace(/^\/api/, '')}`);
-    const data = await res.json();
-    guessPark = data;
     /* Hardcoded Fixes for Possible Answers pt 2 */
     if (guess.id == 2111) guess.inversionsNumber = 3;
     if (guess.id == 3056) guess.inversionsNumber = 2;
     if (guess.id == 2896) guess.seatingType.name = "Floorless";
     if (guess.id == 2006) guess.height = 27;
     if (guess.id == 5612) guess.height = 11;
-    let guessCountry = guessPark.country.name.substring(8);
-    guessCountry = guessCountry[0].toUpperCase() + guessCountry.substring(1);
+    let guessCountry = countryName(guess.park);
     compareStats(guess, guessCountry);
     state.currentRow++;
 }
@@ -284,8 +285,7 @@ function compareStats(guess, guessCountry) {
 
     //Country
     setTimeout(() => {
-        if (guessCountry == 'Usa' || guessCountry == 'Uk') state.grid[row][1] = "" + guessCountry.toUpperCase();
-        else state.grid[row][1] = "" + guessCountry;
+        state.grid[row][1] = "" + guessCountry;
         updateTile(row,1);
         if (answerCountry==guessCountry) document.getElementById(`tile${row}1`).classList.add('correct');
         else document.getElementById(`tile${row}1`).classList.add('wrong');
